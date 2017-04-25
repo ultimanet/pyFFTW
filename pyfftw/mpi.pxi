@@ -1266,7 +1266,7 @@ cdef class FFTW_MPI:
         # then create a view with right dimensions for many transforms,
         # then pick out only one transform and ignore padding elements in last dimension
         arr = chunk[0:np.prod(shape)].reshape(shape)
-        return arr[..., transform:local_shape[-1] * self._howmany:self._howmany]
+        return arr[..., transform:int(local_shape[-1]*self._howmany):self._howmany]
 
     def get_input_array(self, transform=0):
         '''Return a view of the input buffer with the right conceptual dimensions; i.e.,
